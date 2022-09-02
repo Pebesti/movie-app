@@ -1,0 +1,14 @@
+language: node_js
+
+env:
+  - DATABASE_URL=postgres://postgres@localhost:5432/movies_app
+
+node_js:  
+  - 12
+
+before_script:
+  - psql -c 'create database movies_app;' -U postgres
+  - psql -U postgres -d movies_app -a -f ./database/data.sql
+
+services:
+  - postgresql
